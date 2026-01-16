@@ -4,7 +4,7 @@ using UnityEngine;
 public class ObstacleSpawner : MonoBehaviour
 {
     [Header("Spawner Settings")]
-    [SerializeField] private GameObject[] obstaclePrefabs; // ใส่ได้หลายแบบ (เช่น กล่องเล็ก, กล่องใหญ่)
+    [SerializeField] private GameObject[] obstaclePrefabs; // ใส่ได้หลายแบบ
     [SerializeField] private float minSpawnTime = 1f;
     [SerializeField] private float maxSpawnTime = 2f;
 
@@ -16,7 +16,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     void Start()
     {
-        // เริ่มลูปการเสกของ
+        // เริ่มลูปการ Spawn
         StartCoroutine(SpawnLoop());
     }
 
@@ -24,7 +24,7 @@ public class ObstacleSpawner : MonoBehaviour
     {
         while (isSpawning)
         {
-            // 1. รอเวลาแบบสุ่ม
+            // รอเวลาแบบสุ่ม
             float waitTime = Random.Range(minSpawnTime, maxSpawnTime);
             yield return new WaitForSeconds(waitTime);
 
@@ -34,21 +34,21 @@ public class ObstacleSpawner : MonoBehaviour
 
     void SpawnObstacle()
     {
-        // 2. เลือก Prefab แบบสุ่ม (เผื่อในอนาคตมีหลายรูปทรง)
+        // เลือก Prefab แบบสุ่ม
         int randomIndex = Random.Range(0, obstaclePrefabs.Length);
         GameObject prefabToSpawn = obstaclePrefabs[randomIndex];
 
-        // 3. สุ่มว่าจะเกิด บน หรือ ล่าง (50/50)
+        // สุ่มว่าจะเกิด บน หรือ ล่าง (50/50)
         // เพื่อบังคับให้ผู้เล่นต้องใช้สกิล Gravity Shift
         bool isTop = Random.value > 0.5f;
         float spawnY = isTop ? topSpawnY : bottomSpawnY;
 
         Vector3 spawnPos = new Vector3(transform.position.x, spawnY, 0);
 
-        // 4. สร้าง object (Instantiate)
+        // สร้าง object -> Instantiate
         GameObject obj = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
 
-        // **สำคัญมาก**: ถ้าเกิดด้านบน เราต้องกลับหัวสิ่งกีดขวางด้วยเพื่อให้ดูสมจริง
+        // ถ้าอยู่ด้านบน จะกลับหัวสิ่งกีดขวาง เพื่อให้ดูสมจริง
         if (isTop)
         {
             obj.transform.localScale = new Vector3(obj.transform.localScale.x, -obj.transform.localScale.y, obj.transform.localScale.z);

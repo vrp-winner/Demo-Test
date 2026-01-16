@@ -1,6 +1,6 @@
 using UnityEngine;
-using TMPro; // หรือ TMPro ถ้าใช้ TextMeshPro
-using UnityEngine.SceneManagement; // สำหรับโหลดฉากใหม่
+using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance; // Singleton
 
     [Header("UI References")]
-    public TMP_Text scoreText;       // ลาก Text คะแนนมาใส่ (หรือ TMP_Text)
-    public GameObject gameOverUI; // ลาก Panel หน้าจบเกมมาใส่
+    public TMP_Text scoreText;
+    public GameObject gameOverUI;
 
     public bool IsGameOver { get; private set; }
     private float score;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         if (IsGameOver)
         {
-            // 2. เช็คการกดปุ่มด้วยระบบใหม่ (เช็คทั้งคีย์บอร์ดและเมาส์)
+            // เช็คการกดปุ่มด้วยระบบใหม่ -> ทั้งคีย์บอร์ดและเมาส์
             bool isKeyboardPressed = Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame;
             bool isMousePressed = Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
 
@@ -36,10 +36,10 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // เพิ่มคะแนนตามเวลา (ยิ่งรอดนานยิ่งได้เยอะ)
+        // เพิ่มคะแนนตามเวลา
         score += 10 * Time.deltaTime;
 
-        // อัปเดต UI (แปลงเป็น int เพื่อตัดทศนิยม)
+        // อัปเดต UI
         if (scoreText != null)
             scoreText.text = "Score: " + (int)score;
     }
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         IsGameOver = true;
 
-        // หยุดเวลาในเกม (ทำให้ทุกอย่างหยุดนิ่ง)
+        // หยุดเวลาในเกม
         Time.timeScale = 0f;
 
         // เปิดหน้าต่าง Game Over

@@ -8,7 +8,6 @@ public class GroundRepeater : MonoBehaviour
     void Start()
     {
         // หาความกว้างของพื้นจาก Collider
-        // หมายเหตุ: พื้นต้องมี BoxCollider2D นะครับถึงจะใช้สูตรนี้ได้
         groundWidth = GetComponent<BoxCollider2D>().size.x * transform.localScale.x;
     }
 
@@ -20,7 +19,7 @@ public class GroundRepeater : MonoBehaviour
         {
             // ย้ายตำแหน่งไปข้างหน้า (Re-position)
             // สูตร: ย้ายไปข้างหน้าเท่ากับ (ความกว้าง * 2) 
-            // *คูณ 2 เพราะเราจะมีพื้นในฉาก 2 ชิ้นวิ่งสลับกัน
+            // *คูณ 2 เพราะจะมีพื้นในฉาก 2 ชิ้นวิ่งสลับกัน
             Vector2 resetPosition = new Vector2(groundWidth * 2f, 0);
             transform.position = (Vector2)transform.position + resetPosition;
         }
