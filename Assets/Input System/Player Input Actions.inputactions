@@ -29,7 +29,18 @@
                 {
                     "name": "",
                     "id": "a7cde432-7eda-4ca7-aa65-3728e37e33f2",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1005acc7-941b-4909-b27d-869c23f9ca5d",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
